@@ -7,3 +7,5 @@
 1.npm i -g @nestjs/cli
 2.nest new hotel-backend
 3.npm i @prisma/client
+
+rm -fr .git
