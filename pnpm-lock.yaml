@@ -85,10 +85,10 @@ importers:
         specifier: ^10.0.0
         version: 10.3.10(@nestjs/common@10.3.10)(@nestjs/core@10.3.10)(@nestjs/platform-express@10.3.10)
       '@repo/eslint-config':
-        specifier: workspace:*
+        specifier: workspace:_
         version: link:../../packages/eslint-config
       '@repo/typescript-config':
-        specifier: workspace:*
+        specifier: workspace:_
         version: link:../../packages/typescript-config
       '@types/express':
         specifier: ^4.17.17
