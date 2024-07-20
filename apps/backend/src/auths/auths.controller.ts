@@ -73,8 +73,6 @@ export class AuthsController {
       createUserDto.images = uniqueSuffix;
     }
 
-    console.log(createUserDto);
-
     return this.authsService.register(createUserDto);
   }
 

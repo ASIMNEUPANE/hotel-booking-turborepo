@@ -47,13 +47,14 @@ hotel     Hotel    @relation(fields: [hotelId], references: [id])
 model Room {
 id        String   @id @default(uuid())
 img       String[]
-roomId    String
 roomType  RoomType
 isBooked  Boolean
 hotelId   String
 hotel     Hotel    @relation(fields: [hotelId], references: [id])
-userId    String   @unique
-user      User    @relation(fields: [userId], references: [id])
+bookings Booking[]
+
+
+
 }
 
 //Define User model
@@ -70,8 +71,18 @@ isArchive        Boolean @default(false)
 roles            Roles[] @default([USER])
 created_by      String     @default("0")
 updated_by      String     @default("0")
-room             Room?
+bookings  Booking[]
 
+}
+
+model Booking {
+  id       String      @id @default(uuid())
+  userId   String
+  user     User     @relation(fields: [userId], references: [id])
+  roomId   String
+  room     Room     @relation(fields: [roomId], references: [id])
+  checkIn  DateTime
+  checkOut DateTime
 }
 
 

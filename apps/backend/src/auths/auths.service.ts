@@ -14,38 +14,47 @@ export class AuthsService {
   ) {}
 
   async register(createAuthDto: Prisma.UserCreateInput) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { isActive, isEmailVerified, roles, password, ...rest } =
-      createAuthDto as {
-        password: string;
-        [key: string]: any;
-      };
-    const auth = await this.prisma.user.findUnique({
-      where: { email: rest.email },
-    });
-    if (auth)
-      throw new HttpException(
-        'User is already register',
-        HttpStatus.BAD_REQUEST,
-      );
-    const name = await this.prisma.user.findUnique({
-      where: { name: rest.name },
-    });
-    if (name)
-      throw new HttpException(
-        'This username is already in use',
-        HttpStatus.BAD_REQUEST,
-      );
-    rest.password = await this.bcrypt.hashPassword(password);
-    const user = await this.prisma.user.create({
-      data: rest as Prisma.UserUncheckedCreateInput,
-    });
-    const token = generateOTP();
-    const authUSer = { email: user.email, otp: token };
-    const x = await this.prisma.auth.create({ data: authUSer });
-    console.log(x);
-    await mailer(user?.email, token);
-    return user;
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { isActive, isEmailVerified, roles, password, ...rest } =
+        createAuthDto as {
+          password: string;
+          [key: string]: any;
+        };
+
+      const auth = await this.prisma.user.findUnique({
+        where: { email: rest.email },
+      });
+
+      if (auth)
+        throw new HttpException(
+          'User is already register',
+          HttpStatus.BAD_REQUEST,
+        );
+      const name = await this.prisma.user.findUnique({
+        where: { name: rest.name },
+      });
+      if (name)
+        throw new HttpException(
+          'This username is already in use',
+          HttpStatus.BAD_REQUEST,
+        );
+      rest.password = await this.bcrypt.hashPassword(password);
+      const user = await this.prisma.user.create({
+        data: rest as Prisma.UserUncheckedCreateInput,
+      });
+      console.log(user);
+      const token = generateOTP();
+      const authUSer = { email: user.email, otp: token };
+      const x = await this.prisma.auth.create({ data: authUSer });
+      console.log(x);
+      const mail = await mailer(user?.email, token);
+      console.log(mail);
+      return user;
+    } catch (e) {
+      console.log(e);
+      throw new HttpException(`${e}`, HttpStatus.SERVICE_UNAVAILABLE);
+    }
   }
 
   async verify(payload: Prisma.AuthCreateInput) {
