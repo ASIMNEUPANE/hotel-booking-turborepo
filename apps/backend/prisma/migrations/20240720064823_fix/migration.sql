@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "created_by" SET DEFAULT '0',
+ALTER COLUMN "created_by" SET DATA TYPE TEXT,
+ALTER COLUMN "updated_by" SET DEFAULT '0',
+ALTER COLUMN "updated_by" SET DATA TYPE TEXT;

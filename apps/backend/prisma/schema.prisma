@@ -21,11 +21,8 @@ NOACROOM
 }
 
 enum Roles{
-
 ADMIN
-
 USER
-
 }
 
 // Define the models
@@ -64,19 +61,22 @@ user      User    @relation(fields: [userId], references: [id])
 model User{
 
 id               String   @id @default(uuid())
-name             String
-email            String
+name             String   @unique
+email            String   @unique
 password         String
 isEmailVerified  Boolean @default(false)
 isActive         Boolean @default(false)
 isArchive        Boolean @default(false)
-role             Roles[] @default([USER])
+roles            Roles[] @default([USER])
+created_by      String     @default("0")
+updated_by      String     @default("0")
 room             Room?
 
 }
 
+
 model Auth {
-  id    Int    @id @default(autoincrement())
+  id    String    @id @default(uuid())
   email String @unique
   otp   String
 }
