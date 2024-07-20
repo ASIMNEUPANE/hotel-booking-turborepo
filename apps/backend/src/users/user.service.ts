@@ -8,7 +8,7 @@ import {
   DeleteUserDto,
   ResetPasswordDto,
 } from './dtos/update-user.dto';
-import { getReturn } from '@repo/ui/src/types/returnType';
+import { getReturn } from '@repo/common/src/types/type';
 @Injectable()
 export class UserService {
   constructor(

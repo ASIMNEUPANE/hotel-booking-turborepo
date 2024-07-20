@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      turbos:
+        specifier: 'link:'
+        version: 'link:'
     devDependencies:
       eslint-config-prettier:
         specifier: ^9.1.0
@@ -41,12 +45,9 @@ importers:
       '@prisma/client':
         specifier: ^5.17.0
         version: 5.17.0(prisma@5.17.0)
-      '@repo/ui':
+      '@repo/common':
         specifier: workspace:*
-        version: link:../../packages/ui
-      backend:
-        specifier: 'link:'
-        version: 'link:'
+        version: link:../../packages/common
       bcrypt:
         specifier: ^5.1.1
         version: 5.1.1
@@ -187,6 +188,8 @@ importers:
       typescript:
         specifier: ^5
         version: 5.3.3
+
+  packages/common: {}
 
   packages/eslint-config:
     devDependencies:

@@ -6,3 +6,8 @@ and also update in the turbo.json build
 
 // "@repo/eslint-config": "workspace:_",
 // "@repo/typescript-config": "workspace:_",
+
+to create new package
+1.npm/pnpm i init
+2.add tsconfig.json
+note:[ whenever create a new package do pnpm add .]
