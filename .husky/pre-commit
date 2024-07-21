@@ -7,5 +7,6 @@ pnpm run lint
 
 
 echo "Pre-commit hook passed (all checks passed)."
+pnpm run test
 
 git add .

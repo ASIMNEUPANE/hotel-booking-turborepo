@@ -2,13 +2,11 @@
   "name": "@repo/common",
   "version": "1.0.0",
   "main": "index.js",
-  "exports":{
-    "./config":"./src/index.ts",
-    "./types":"./src/types/type.ts"
+  "exports": {
+    "./config": "./src/index.ts",
+    "./types": "./src/types/type.ts"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
