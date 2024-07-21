@@ -67,8 +67,8 @@ describe('AuthsService', () => {
       ],
     }).compile();
 
-    service = module.get<AuthsService>(AuthsService);
-    prismaService = module.get<PrismaService>(PrismaService);
+    service = await module.get<AuthsService>(AuthsService);
+    prismaService = await module.get<PrismaService>(PrismaService);
   });
 
   it('should be defined', () => {

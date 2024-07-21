@@ -1,3 +1,11 @@
+
 pnpm run format
+
+echo "Running ESLint..."
 pnpm run lint
+
+
+
+echo "Pre-commit hook passed (all checks passed)."
+
 git add .

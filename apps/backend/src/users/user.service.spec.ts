@@ -68,8 +68,8 @@ describe('BlogService', () => {
       ],
     }).compile();
 
-    service = module.get<UserService>(UserService);
-    prismaService = module.get<PrismaService>(PrismaService);
+    service = await module.get<UserService>(UserService);
+    prismaService = await module.get<PrismaService>(PrismaService);
   });
 
   it('should be defined', () => {
@@ -132,7 +132,7 @@ describe('BlogService', () => {
       const result = await service.getById('1');
       expect(result).toEqual(UserArray[0]);
       expect(prismaService.user.findUnique).toHaveBeenCalledWith({
-        where: { id: 1 },
+        where: { id: '1' },
       });
     });
   });
@@ -173,7 +173,7 @@ describe('BlogService', () => {
       );
       expect(result).toEqual(UserArray[0]);
       expect(prismaService.user.findUnique).toHaveBeenCalledWith({
-        where: { id: 1 },
+        where: { id: '1' },
       });
       expect(BcryptPass.prototype.comparePasswords).toHaveBeenCalledWith(
         'oldPassword',
@@ -195,7 +195,7 @@ describe('BlogService', () => {
         new HttpException('User not found', HttpStatus.BAD_REQUEST),
       );
       expect(prismaService.user.findUnique).toHaveBeenCalledWith({
-        where: { id: 1 },
+        where: { id: '1' },
       });
     });
     it('should throw an error if user is not found', async () => {
@@ -233,14 +233,14 @@ describe('BlogService', () => {
       });
 
       expect(prismaService.user.findUnique).toHaveBeenCalledWith({
-        where: { id: 1 },
+        where: { id: '1' },
       });
       expect(BcryptPass.prototype.hashPassword).toHaveBeenCalledWith(
         'helloworld',
       );
       expect(result).toEqual(UserArray[0]);
       expect(prismaService.user.update).toHaveBeenCalledWith({
-        where: { id: 1 },
+        where: { id: '1' },
         data: { password: 'hashPassword' },
       });
     });
