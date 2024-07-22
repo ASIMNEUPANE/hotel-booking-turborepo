@@ -3,6 +3,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { VersioningType } from '@nestjs/common';
+// import { HttpExceptionFilter } from './exception.filter';
 
 async function bootstrap() {
   const logger = new Logger('bootstrap');
@@ -13,6 +14,8 @@ async function bootstrap() {
     defaultVersion: '1',
   });
   app.enableCors();
+  // app.useGlobalFilters(new HttpExceptionFilter());
+
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -28,7 +31,7 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app as any, config);
-  SwaggerModule.setup('/', app as any, document);
+  SwaggerModule.setup('/document', app as any, document);
   const PORT = 3333;
   await app.listen(PORT);
   logger.log(`app is running on port ${PORT} `);

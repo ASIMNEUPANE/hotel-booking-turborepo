@@ -4,9 +4,9 @@ pnpm run format
 echo "Running ESLint..."
 pnpm run lint
 
-
+echo "Running Testing"
+pnpm run test
 
 echo "Pre-commit hook passed (all checks passed)."
-pnpm run test
 
 git add .

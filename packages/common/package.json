@@ -4,7 +4,8 @@
   "main": "index.js",
   "exports": {
     "./config": "./src/index.ts",
-    "./types": "./src/types/type.ts"
+    "./types": "./src/types/type.ts",
+    "./hotelReturnTypes": "./src/types/hotel.return.type.ts"
   },
   "scripts": {},
   "keywords": [],

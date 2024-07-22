@@ -84,7 +84,7 @@ export class UserController {
     type: [UserEntity],
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  getUserById(@Param('id', ParseIntPipe) id: string) {
+  getUserById(@Param('id') id: string) {
     return this.userService.getById(id);
   }
 

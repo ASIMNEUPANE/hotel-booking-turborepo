@@ -11,3 +11,5 @@ to create new package
 1.npm/pnpm i init
 2.add tsconfig.json
 note:[ whenever create a new package do pnpm add .]
+
+algo to create a hotel

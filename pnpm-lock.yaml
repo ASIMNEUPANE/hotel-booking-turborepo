@@ -48,6 +48,9 @@ importers:
       '@repo/common':
         specifier: workspace:*
         version: link:../../packages/common
+      backend:
+        specifier: 'link:'
+        version: 'link:'
       bcrypt:
         specifier: ^5.1.1
         version: 5.1.1

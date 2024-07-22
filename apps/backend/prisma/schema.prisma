@@ -13,70 +13,66 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 // Define the enums
 enum RoomType {
-ACROOM
-NOACROOM
+  ACROOM
+  NOACROOM
 }
 
-enum Roles{
-ADMIN
-USER
+enum Roles {
+  ADMIN
+  USER
 }
 
 // Define the models
 model Hotel {
-id       String   @id @default(uuid())
-name     String
-address  String
-contact  String
-email    String
-rooms    Room[]
-reviews  Review[]
+  id        String   @id @default(uuid())
+  img       String
+  name      String
+  address   String
+  contact   Int
+  isArchive Boolean
+  email     String
+  rooms     Room[]
+  reviews   Review[]
 }
 
 model Review {
-id        String   @id @default(uuid())
-comment   String?
-star      Int
-hotelId   String
-hotel     Hotel    @relation(fields: [hotelId], references: [id])
+  id      String  @id @default(uuid())
+  comment String?
+  star    Int
+  hotelId String
+  hotel   Hotel   @relation(fields: [hotelId], references: [id])
 }
 
 model Room {
-id        String   @id @default(uuid())
-img       String[]
-roomType  RoomType
-isBooked  Boolean
-hotelId   String
-hotel     Hotel    @relation(fields: [hotelId], references: [id])
-bookings Booking[]
-
-
-
+  id       String    @id @default(uuid())
+  img      String[]
+  roomType RoomType
+  isBooked Boolean
+  hotelId  String
+  hotel    Hotel     @relation(fields: [hotelId], references: [id])
+  bookings Booking[]
 }
 
 //Define User model
 
-model User{
-
-id               String   @id @default(uuid())
-name             String   @unique
-email            String   @unique
-password         String
-isEmailVerified  Boolean @default(false)
-isActive         Boolean @default(false)
-isArchive        Boolean @default(false)
-roles            Roles[] @default([USER])
-created_by      String     @default("0")
-updated_by      String     @default("0")
-bookings  Booking[]
-
+model User {
+  id              String    @id @default(uuid())
+  name            String    @unique
+  email           String    @unique
+  password        String
+  isEmailVerified Boolean   @default(false)
+  isActive        Boolean   @default(false)
+  isArchive       Boolean   @default(false)
+  roles           Roles[]   @default([USER])
+  created_by      String    @default("0")
+  updated_by      String    @default("0")
+  bookings        Booking[]
 }
 
 model Booking {
-  id       String      @id @default(uuid())
+  id       String   @id @default(uuid())
   userId   String
   user     User     @relation(fields: [userId], references: [id])
   roomId   String
@@ -85,9 +81,8 @@ model Booking {
   checkOut DateTime
 }
 
-
 model Auth {
-  id    String    @id @default(uuid())
+  id    String @id @default(uuid())
   email String @unique
   otp   String
 }
