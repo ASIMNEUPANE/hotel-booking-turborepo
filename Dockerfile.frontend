@@ -1,0 +1,22 @@
+FROM node:20
+WORKDIR /app
+
+RUN npm install -g pnpm
+
+COPY pnpm-workspace.yaml ./
+COPY package.json ./
+
+
+COPY apps/web/package.json ./
+
+WORKDIR /app
+
+RUN pnpm install --filter ./apps/web...
+WORKDIR /app/apps/web
+
+
+RUN pnpm run build
+
+EXPOSE 3000
+
+CMD ["pnpm", "start"]
