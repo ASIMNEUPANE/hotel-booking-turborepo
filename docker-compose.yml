@@ -17,11 +17,13 @@ services:
       dockerfile: Dockerfile.backend
     container_name: backend
     environment:
-      DATABASE_HOST: postgres
-      DATABASE_PORT: 5432
-      DATABASE_USERNAME: myuser
-      DATABASE_PASSWORD: mypassword
-      DATABASE_NAME: mydatabase
+      # DATABASE_HOST: postgres
+      # DATABASE_PORT: 5432
+      # DATABASE_USERNAME: myuser
+      # DATABASE_PASSWORD: mypassword
+      # DATABASE_NAME: mydatabase
+      DATABASE_URL: "postgres://myuser:mypassword@postgres:5432/mydatabase"
+
     ports:
       - "3333:3333"
     depends_on:

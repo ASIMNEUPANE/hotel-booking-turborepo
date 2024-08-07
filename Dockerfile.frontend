@@ -1,22 +1,28 @@
-FROM node:20
-WORKDIR /app
+#  Created Base Image for all stages
+FROM node:20-alpine3.20 As base
+RUN apk add --no-cache libc6-compat && \
+    npm install -g pnpm
 
-RUN npm install -g pnpm
-
+FROM base AS builder
+WORKDIR /opt
+COPY apps/web ./apps/web
 COPY pnpm-workspace.yaml ./
-COPY package.json ./
+COPY packages ./packages
+RUN cd apps/web && \
+    pnpm install && \
+    pnpm run build 
 
 
-COPY apps/web/package.json ./
+FROM base As prod
+WORKDIR /prod
+COPY --from=builder /opt/apps/web/.next ./apps/web/.next
+COPY --from=builder /opt/apps/web/node_modules ./apps/web/node_modules
+COPY --from=builder /opt/apps/web/package.json ./apps/web/package.json
+COPY --from=builder /opt/node_modules ./node_modules
+COPY --from=builder /opt/packages ./packages
 
-WORKDIR /app
-
-RUN pnpm install --filter ./apps/web...
-WORKDIR /app/apps/web
-
-
-RUN pnpm run build
+WORKDIR /prod/apps/web
 
 EXPOSE 3000
 
-CMD ["pnpm", "start"]
+CMD [ "pnpm", "run", "start" ]
