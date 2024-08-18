@@ -14,3 +14,6 @@ urls:[https://medium.com/@bonaventuragal/nestjs-testing-recipe-mocking-prisma-27
 "inputs": ["$TURBO_DEFAULT$", ".env*"],
 "outputs": []
 }
+
+
+this is for workspace testing only
